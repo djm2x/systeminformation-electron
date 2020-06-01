@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <!-- <div class="row">
+    <div class="col-md-3 card" *ngFor="let e of wifis;trackBy: trackByFn; let i=index">
+      <div class="card-body">
+        <p class="m-0"> {{e.ssid}}</p>
+        <p class="m-0"> {{e.bssid}}</p>
+        <p class="m-0"> channel : {{e.channel}} </p>
+        <p class="m-0"> signalLevel : {{e.signalLevel}} </p>
+        <p class="m-0"> quality : {{e.quality}} </p>
+        <p class="m-0"> {{e.security | json}} </p>
+        <p class="m-0"> {{e.wpaFlags | json}} </p>
+        <p class="m-0"> {{e.rsnFlags | json}} </p>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-3 card m-1" style="border-radius: 0;" *ngFor="let e of pages;trackBy: trackByFn; let i=index">
+      <div class=" d-flex justify-content-between align-items-center pt-3 pb-3" [routerLink]="['/admin/wifi']" >
+        <mat-icon class="mb-3" style="font-size: 2em; color: #0F7FD9;">{{e.icon}}</mat-icon>
+        <span style="color: gray;">{{e.name}}</span>
+      </div>
+    </div>
+  </div>
+
+
+</div>

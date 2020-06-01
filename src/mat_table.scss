@@ -1,0 +1,115 @@
+// .host {
+//   margin: 1em !important;
+// }
+
+/* Structure */
+.example-container {
+  position: relative !important;
+  // min-height: 200px !important;
+}
+
+.mat-header-row {
+  // background-color: #ebebeb  !important;
+  .mat-sort-header-button ,.mat-header-cell {
+    font-weight: bolder !important;
+    // color: rgb(0, 0, 0) !important;
+  }
+}
+
+.mat-header-row .mat-sort-header-button {
+  font-weight: bolder !important;
+  // color: rgb(0, 0, 0) !important;
+}
+
+
+
+tr {
+  // background-color: rgba(255, 255, 255, 0) !important;
+}
+
+tr:hover {
+  transition: background-color .6s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+  // background-color: rgb(247, 247, 247) !important;
+}
+
+// section {
+//   display: flex !important;
+//   justify-content: space-between !important;
+//   align-items: center !important;
+// }
+
+// ::ng-deep h3 {
+//   margin: 0 !important;
+// }
+
+::ng-deep  .mat-header-row {
+  // background-color: #ebebeb !important;
+}
+mat-card {
+  margin: .8em 0 !important;
+  .inputs {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    grid-column-gap: 6px !important;
+    grid-row-gap:6px !important;
+    // justify-content: space-around !important;
+    // flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+
+  // button {
+  //   margin-left: auto !important;
+  // }
+}
+
+.right {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  width: 100%;
+  margin-right: 15px;
+}
+
+
+
+.example-table-container {
+  position: relative !important;
+  // max-height: 400px !important;
+  // max-height: 60vh !important;
+  overflow: auto !important;
+  width: 100% !important;
+}
+
+table {
+  width: 100% !important;
+}
+
+.example-loading-shade {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  bottom: 56px !important;
+  right: 0 !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+  z-index: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.example-rate-limit-reached {
+  color: #980000 !important;
+  max-width: 360px !important;
+  text-align: center !important;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 4px !important;
+}
+
+.mat-column-created {
+  max-width: 24px !important;
+}
+

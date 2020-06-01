@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3 card" *ngFor="let e of wifis;trackBy: trackByFn; let i=index">
+      <div class="card-body">
+        <p class="m-0"> {{e.ssid}}</p>
+        <p class="m-0"> {{e.bssid}}</p>
+        <p class="m-0"> channel : {{e.channel}} </p>
+        <p class="m-0 mb-2" > signalLevel : <span style="background-color: red; color: white;">{{e.signalLevel}}</span> </p>
+        <p class="m-0" > quality : <span style="background-color: red; color: white;">{{e.quality}}</span> </p>
+        <!-- <p class="m-0"> {{e.security | json}} </p>
+        <p class="m-0"> {{e.wpaFlags | json}} </p>
+        <p class="m-0"> {{e.rsnFlags | json}} </p> -->
+      </div>
+    </div>
+  </div>
+</div>
