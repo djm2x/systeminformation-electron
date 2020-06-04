@@ -10,7 +10,7 @@ async function main() {
       directories: {
         output: 'build08',
         // buildResources: `./`,
-        // app: './dist'
+        app: './'
       },
       buildVersion: '1.0.0',
       appId: 'com.myCompany.myApp',
@@ -28,7 +28,8 @@ async function main() {
         files: [
           './node_modules/@*',
           '!./build*',
-          './dist/main.js',
+          '!./angular*',
+          // './dist/main.js',
           './dist/**/*'
         ],
         target: [
