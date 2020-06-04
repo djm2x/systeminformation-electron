@@ -3,10 +3,14 @@ import * as url from 'url';
 import { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } from 'electron';
 import { bios, baseboard, chassis, system, wifiNetworks, getStaticData, getDynamicData } from 'systeminformation';
 const ENVIRONMENT = process.env.ELECTRON_ENV || 1;
+const ELECTRON_ENV_TEST = process.env.ELECTRON_ENV_TEST ? true : false;
 // const ENVIRONMENT = ENVIRONMENT1.toString();
 const ANGULAR_SERVE = 'http://localhost:4200';
 const FILE = `file://${join(__dirname, 'angular/index.html')}`;
 let mainWindow: Electron.BrowserWindow;
+
+console.log(FILE)
+console.log(ELECTRON_ENV_TEST)
 
 function createWindow() {
   // Initialize the window to our specified dimensions
@@ -23,7 +27,7 @@ function createWindow() {
     }
   });
   // load the dist folder from Angular
-  prod ? mainWindow.loadURL(FILE) : mainWindow.loadURL(ANGULAR_SERVE);
+  prod || ELECTRON_ENV_TEST ? mainWindow.loadURL(FILE) : mainWindow.loadURL(ANGULAR_SERVE);
 
   // Show dev tools
   // Remove this line before distributing

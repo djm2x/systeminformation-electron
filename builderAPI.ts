@@ -1,6 +1,8 @@
 import * as builder from 'electron-builder';
 
-
+const productName = 'djapp';
+const version = '1.0.0';
+const ext = 'exe';
 async function main() {
   const opt: builder.CliOptions = {
     targets: builder.Platform.WINDOWS.createTarget(),
@@ -14,6 +16,12 @@ async function main() {
       appId: 'com.myCompany.myApp',
       productName: 'myAppName',
       copyright: 'Copyright © 2019 myCompany',
+      nsisWeb: {
+        appPackageUrl : 'https://example.com/download/latest',
+        artifactName: `${productName} Web Setup ${version}.${ext}`,
+        allowElevation: true,
+        allowToChangeInstallationDirectory: true,
+      },
       win: {
         artifactName: 'caisse.exe',
         asar: false,
@@ -25,10 +33,10 @@ async function main() {
         ],
         target: [
           {
-            target: 'portable',
+            target: 'nsis-web',
             arch: [
-              // 'ia32',
-              'x64'
+              'ia32',
+              // 'x64'
             ],
           }
         ],

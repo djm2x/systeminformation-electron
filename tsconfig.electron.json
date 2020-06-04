@@ -1,17 +1,31 @@
 {
-  "extends": "./tsconfig.json",
+  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+
     "outDir": "dist", // <-- Note that we're making electron parallel to the app.
     "sourceMap": false,
     "module": "commonjs",
+
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es5",
     "types": [
       "node"
-    ] // <-- We need the "node" type for typescript.
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
   },
-  "baseUrl": "./",
   "include": [
-    "index.ts", // <-- This is the only file included.
-    "api/**/*.ts"
+    "main.ts",
   ],
   "exclude": [
     "src/test.ts",
