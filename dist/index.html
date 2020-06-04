@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Front</title>
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.png"> -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet"> -->
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+<link rel="stylesheet" href="styles.1e1565a0ae8029f9ebf3.css"></head>
+<body>
+  <style>
+    #vex-splash-screen {
+      /* display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; */
+      /* background: #13293d; */
+      z-index: 99999;
+      pointer-events: none;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #vex-splash-screen .header {
+      /* z-index: 10;
+      color: white; */
+      margin-bottom: 7vh;
+    }
+
+    #vex-splash-screen>.wrapper {
+      /* position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%); */
+    }
+
+    @-webkit-keyframes ball-scale-multiple {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes ball-scale-multiple {
+      0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    .ball-scale-multiple {
+      position: relative;
+      /* -webkit-transform: translateY(-30px);
+      transform: translateY(-30px); */
+    }
+
+    .ball-scale-multiple>div:nth-child(2) {
+      -webkit-animation-delay: -0.4s;
+      animation-delay: -0.4s;
+    }
+
+    .ball-scale-multiple>div:nth-child(3) {
+      -webkit-animation-delay: -0.2s;
+      animation-delay: -0.2s;
+    }
+
+    .ball-scale-multiple>div {
+      background-color: #2304bfb9;
+      border-radius: 100%;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      position: absolute;
+      left: -45px;
+      top: 0;
+      opacity: 0;
+      margin: 0;
+      width: 90px;
+      height: 90px;
+      -webkit-animation: ball-scale-multiple 1s 0s linear infinite;
+      animation: ball-scale-multiple 1s 0s linear infinite;
+    }
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+
+  </style>
+
+  <div id="vex-splash-screen">
+    <div class="header">
+      <!-- <img src="assets/logo.png" width="200" > -->
+      <h1 style="font-weight: bold; color: #2304bfb9;">My App</h1>
+    </div>
+    <div class="wrapper">
+      <div class="ball-scale-multiple">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="footer">
+      <img src="assets/favicon.png" width="50" height="50">
+      <p> - Mohamed-Mourabit</p>
+    </div>
+  </div>
+  <app-root></app-root>
+<script src="runtime.6786858bced01eeeeee1.js" defer></script><script src="polyfills-es5.521d0992408f591a7296.js" nomodule defer></script><script src="polyfills.61acaf97a950ac27c6ba.js" defer></script><script src="main.2b25699f233addf62686.js" defer></script></body>
+</html>

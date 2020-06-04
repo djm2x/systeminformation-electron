@@ -35,10 +35,10 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "electron-builder": "^22.7.0",
     "systeminformation": "^4.23.3"
   },
   "devDependencies": {
+    "electron-builder": "^22.7.0",
     "@types/node": "^12.11.1",
     "electron": "^9.0.1",
     "ts-node": "~8.3.0",

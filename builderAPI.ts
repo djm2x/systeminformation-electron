@@ -8,7 +8,7 @@ async function main() {
     targets: builder.Platform.WINDOWS.createTarget(),
     config: {
       directories: {
-        output: 'build07',
+        output: 'build08',
         // buildResources: `./`,
         // app: './dist'
       },
@@ -26,9 +26,9 @@ async function main() {
         artifactName: 'caisse.exe',
         asar: false,
         files: [
-          '!./node_modules/@*',
+          './node_modules/@*',
           '!./build*',
-          // './dist/main.js',
+          './dist/main.js',
           './dist/**/*'
         ],
         target: [
