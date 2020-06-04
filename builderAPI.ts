@@ -21,6 +21,7 @@ async function main() {
         artifactName: `${productName} Web Setup ${version}.${ext}`,
         allowElevation: true,
         allowToChangeInstallationDirectory: true,
+        oneClick: false,
       },
       win: {
         artifactName: 'caisse.exe',
@@ -29,7 +30,7 @@ async function main() {
           './node_modules/@*',
           '!./build*',
           '!./angular*',
-          // './dist/main.js',
+          './main.js',
           './dist/**/*'
         ],
         target: [

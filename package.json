@@ -1,6 +1,7 @@
 {
-  "name": "angular",
+  "name": "electron",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "pi": "electron-builder install-app-deps",
     "i-electron": "npm i electron --ia32 -D",
