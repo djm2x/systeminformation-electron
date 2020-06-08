@@ -10,7 +10,6 @@ import { MatButton } from '@angular/material/button';
 import { User } from '../Models/models';
 import { routerTransition } from '../shared/animations';
 import { FormControl } from '@angular/forms';
-import * as si from 'systeminformation';
 import { ElectronService } from './electron.service';
 @Component({
   selector: 'app-admin',
@@ -119,19 +118,4 @@ export class AdminComponent implements OnInit {
   }
 }
 
-interface Res {
-  generalStaticData: si.Systeminformation.StaticData;
-  memoire: si.Systeminformation.MemData;
-  // system: si.Systeminformation.SystemData;
-  // bios: si.Systeminformation.BiosData;
-  // baseboard: si.Systeminformation.BaseboardData;
-  // chassis: si.Systeminformation.ChassisData;
-  wifiNetworks: si.Systeminformation.WifiNetworkData[];
-  softwares: {
-    RegistryDirName: string,
-    DisplayName: string,
-    DisplayVersion: string,
-    InstallLocation: string,
-    Publisher: string,
-  }[];
-}
+
