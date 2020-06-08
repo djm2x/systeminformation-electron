@@ -87,18 +87,25 @@ mat-sidenav-container {
 
 }
 
-mat-sidenav-content {
-  // &::before {
-  //   content: '';
-  //   z-index: -1;
-  //   position: absolute;
-  //   // background: linear-gradient(90deg, rgba(93,53,164,1) 0%, rgba(101,57,179,1) 35%, rgba(108,60,193,1) 100%);
-  //   // background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
-  //   // background: rgb(241, 241, 241);
-  //   width: 100%;
-  //   height: 50vh;
-  //   top: 0;
-  //   box-shadow: 0px 1px 8px 1px gray;
-  // }
+::ng-deep .mat-tab-label-container {
+  display: none !important;
 }
+
+::ng-deep .mat-tab-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0) !important;
+}
+
+::ng-deep .mat-tab-group {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+::ng-deep .mat-tab-body.mat-tab-body-active {
+  width: 100% !important;
+}
+
+
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
+
 

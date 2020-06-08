@@ -2,6 +2,12 @@ import { join } from 'path';
 import * as url from 'url';
 import { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } from 'electron';
 import { bios, baseboard, chassis, system, wifiNetworks, getStaticData, getDynamicData } from 'systeminformation';
+import * as si from 'systeminformation';
+import * as fis from 'fetch-installed-software';
+
+
+
+
 const ENVIRONMENT = process.env.ELECTRON_ENV || 1;
 const ELECTRON_ENV_TEST = process.env.ELECTRON_ENV_TEST ? true : false;
 // const ENVIRONMENT = ENVIRONMENT1.toString();
@@ -12,9 +18,18 @@ let mainWindow: Electron.BrowserWindow;
 console.log(FILE)
 console.log(ELECTRON_ENV_TEST)
 
+const dev = ENVIRONMENT === 1 ? false : true;
+// if (dev) { 
+//   try { 
+//       require('electron-reloader')(module, { 
+//           debug: true, 
+//           watchRenderer: true
+//       }); 
+//   } catch (_) { console.log('Error'); }     
+// } 
+
 function createWindow() {
   // Initialize the window to our specified dimensions
-  const dev = ENVIRONMENT === 1 ? false : true;
   const prod = !dev;
   mainWindow = new BrowserWindow({
     width: 1700,
@@ -27,7 +42,7 @@ function createWindow() {
     }
   });
   // load the dist folder from Angular
-  prod || ELECTRON_ENV_TEST ? mainWindow.loadURL(FILE) : mainWindow.loadURL(ANGULAR_SERVE);
+  dev ? mainWindow.loadURL(ANGULAR_SERVE) : mainWindow.loadURL(FILE) ;
 
   // Show dev tools
   // Remove this line before distributing
@@ -38,7 +53,7 @@ function createWindow() {
   // Remove window once app is closed
   mainWindow.on('closed', () => mainWindow = null);
 
-
+  // const env = process.env.NODE_ENV || 'development';
   activeDevToolsListner();
   getInfo();
   wifi();
@@ -49,26 +64,41 @@ function createWindow() {
 
   // mainWindow.setFullScreen(true);
   // mainWindow.maximize();
+
+  
+
 }
 
-function activeDevToolsListner() {
-  ipcMain.on('main', (event, r) => {
-    mainWindow.webContents.openDevTools();
+// let softwares = (fis.getAllInstalledSoftwareSync() as any[]).filter(e => {
+//               // console.log(e.RegistryDirName)
+//               // console.log('>>>>>>>>>>>>>>>>>>', (e.RegistryDirName as string).startsWith(`{`))
+//               return !(e.RegistryDirName as string).startsWith(`{`);
+//             })
+// console.log(softwares.map((e, i) => i +'---'+ e.RegistryDirName), softwares.length)
 
-    mainWindow.webContents.send('page', 'i did click for you');
-  });
-}
+
 
 async function getInfo() {
-  const all = {
-    system: await system(),
-    bios: await bios(),
-    baseboard: await baseboard(),
-    chassis: await chassis(),
-    wifiNetworks: await wifiNetworks(),
-  };
-  ipcMain.on('getInfo', (event, r) => {
+  // const softwares = (fis.getAllInstalledSoftwareSync() as any[]).filter(e => {
+  //   // console.log(e)
+  //   return true || !(e.RegistryDirName as string).startsWith(`'{`);
+  // })
+  
+  console.log('call 1')
+  ipcMain.on('getInfo', async (event, r) => {
     // mainWindow.webContents.openDevTools();
+    const all = {
+      // generalStaticData: await si.get,
+      generalStaticData: await si.getStaticData(),
+      memoire: await si.mem(),
+      // system: await si.system(),
+      // bios: await si.bios(),
+      // baseboard: await si.baseboard(),
+      // chassis: await si.chassis(),
+      wifiNetworks: await si.wifiNetworks(),
+      softwares: (fis.getAllInstalledSoftwareSync() as any[]).filter(e => !(e.RegistryDirName as string).startsWith(`{`)),
+    };
+    console.log('call 2')
 
     mainWindow.webContents.send('angular', all);
   });
@@ -92,11 +122,15 @@ function send(listningRoute: string, data: any) {
   });
 }
 
+function activeDevToolsListner() {
+  ipcMain.on('main', (event, r) => {
+    mainWindow.webContents.openDevTools();
+
+    mainWindow.webContents.send('page', 'i did click for you');
+  });
+}
 
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.

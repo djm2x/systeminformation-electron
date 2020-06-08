@@ -9,6 +9,9 @@ import { MediaService } from './media.service';
 import { MatButton } from '@angular/material/button';
 import { User } from '../Models/models';
 import { routerTransition } from '../shared/animations';
+import { FormControl } from '@angular/forms';
+import * as si from 'systeminformation';
+import { ElectronService } from './electron.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -21,8 +24,7 @@ export class AdminComponent implements OnInit {
   keyDevTools = '';
   panelOpenState = false;
   mobileQuery: MediaQueryList;
-  currentSection = 'section1';
-  userImg = '../../assets/caisse.jpg';
+  tabIndex = new FormControl(0);
   opened = false;
   idRole = -1;
   isConnected = false;
@@ -33,10 +35,10 @@ export class AdminComponent implements OnInit {
   // categories = this.uow.categories.get();
   constructor(public session: SessionService, changeDetectorRef: ChangeDetectorRef
     , public media: MediaMatcher, public router: Router, private uow: UowService
-    , public theme: ThemeService, public myMedia: MediaService) {
+    , public theme: ThemeService, public myMedia: MediaService, private service: ElectronService) {
 
 
-    this.mobileQuery = media.matchMedia('(max-width: 1000px)');
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQuery.addListener((e: MediaQueryListEvent) => changeDetectorRef.detectChanges());
   }
 
@@ -46,13 +48,18 @@ export class AdminComponent implements OnInit {
     //   console.log(r)
     // })
 
-
     // this.getRoute();
     setTimeout(() => {
-      this.user = this.session.user;
+      // this.user = this.session.user;
       // console.log(this.user);
       this.snav.toggle();
     }, 300);
+
+    setTimeout(() => {
+      // this.user = this.session.user;
+      // console.log(this.user);
+      this.get();
+    }, 1000);
 
   }
 
@@ -83,19 +90,48 @@ export class AdminComponent implements OnInit {
     return outlet.activatedRouteData.state;
   }
 
+  get() {
+    console.log('>>>>>>>>>>>>>>>>>>>>>chargement')
+    this.service.get('getInfo').subscribe((r: Res) => {
+      console.log(r);
+      console.log('>>>>>>>>>>>>>>>>>>>>>done')
+    });
+  }
+
   get routes() {
     return [
-      { path: '/admin/system', name: 'System', icon: 'view_list' },
-      { path: '/admin/cpu', name: 'CPU', icon: 'view_list' },
-      { path: '/admin/general', name: 'General', icon: 'view_list' },
-      { path: '/admin/memory', name: 'Memory', icon: 'memory' },
-      { path: '/admin/battery', name: 'Battery', icon: 'battery_std' },
-      { path: '/admin/graphics', name: 'Graphics', icon: 'view_list' },
-      { path: '/admin/os', name: 'OS', icon: 'power_settings_new' },
-      { path: '/admin/process', name: 'Process', icon: 'view_list' },
-      { path: '/admin/disks', name: 'Disks / FS', icon: 'storage' },
-      { path: '/admin/network', name: 'Network', icon: 'settings_input_hdmi' },
-      { path: '/admin/wifi', name: 'Wifi', icon: 'wifi' }
-    ];
+      { path: '/admin/general', index: 0, name: 'General', icon: 'memory' },
+      { path: '/admin/software', index: 0, name: 'software', icon: 'extension' },
+      // { path: '/admin/system', index: 0, name: 'System', icon: 'view_list' },
+      // { path: '/admin/cpu', index: 0, name: 'CPU', icon: 'view_list' },
+      // { path: '/admin/memory', index: 0, name: 'Memory', icon: 'memory' },
+      // { path: '/admin/battery', index: 0, name: 'Battery', icon: 'battery_std' },
+      // { path: '/admin/graphics', index: 0, name: 'Graphics', icon: 'view_list' },
+      // { path: '/admin/os', index: 0, name: 'OS', icon: 'power_settings_new' },
+      // { path: '/admin/process', index: 0, name: 'Process', icon: 'view_list' },
+      // { path: '/admin/disks', index: 0, name: 'Disks / FS', icon: 'storage' },
+      // { path: '/admin/network', index: 0, name: 'Network', icon: 'settings_input_hdmi' },
+      { path: '/admin/wifi', index: 0, name: 'Wifi', icon: 'wifi' }
+    ].map((e, i) => {
+      e.index = i;
+      return e;
+    });
   }
+}
+
+interface Res {
+  generalStaticData: si.Systeminformation.StaticData;
+  memoire: si.Systeminformation.MemData;
+  // system: si.Systeminformation.SystemData;
+  // bios: si.Systeminformation.BiosData;
+  // baseboard: si.Systeminformation.BaseboardData;
+  // chassis: si.Systeminformation.ChassisData;
+  wifiNetworks: si.Systeminformation.WifiNetworkData[];
+  softwares: {
+    RegistryDirName: string,
+    DisplayName: string,
+    DisplayVersion: string,
+    InstallLocation: string,
+    Publisher: string,
+  }[];
 }

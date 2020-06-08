@@ -33,54 +33,52 @@
 <mat-sidenav-container #sidenav class="example-sidenav-container" style="height: 100%;z-index: 9;">
   <mat-sidenav #snav [mode]="(!mobileQuery.matches) ? 'side' : 'push'" [opened]="opened && !mobileQuery.matches"
     [fixedInViewport]="true" fixedTopGap="40">
-    <mat-nav-list class="list" style="width: 320px; padding: 0;">
-      <mat-list-item [routerLink]="['/admin/dash']" routerLinkActive="router-link-active">
+    <mat-nav-list class="list" style="width: 160px; padding: 0;">
+      <mat-list-item (click)="tabIndex.setValue(1)">
         <mat-icon>home</mat-icon>&nbsp;<span>Acceuil</span>
         <mat-divider></mat-divider>
       </mat-list-item>
 
-      <mat-list-item *ngFor="let e of pages" [routerLink]="[e.path]" routerLinkActive="router-link-active" >
+      <mat-list-item *ngFor="let e of pages" (click)="tabIndex.setValue(e.index)"
+        [ngClass]="{'router-link-active': e.index === tabIndex.value}">
         <mat-icon>{{e.icon}}</mat-icon>&nbsp;<span>{{e.name}}</span>
       </mat-list-item>
 
-
-      <!-- <mat-accordion>
-
-        <mat-expansion-panel (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Paramétrage
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <mat-list-item [routerLink]="['/admin/role']" routerLinkActive="router-link-active">
-            <mat-icon>control_point_duplicate</mat-icon>&nbsp;<span>Role</span>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-
-        </mat-expansion-panel>
-      </mat-accordion> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
 
-
-    <!-- <div style="margin: 65px auto 15px;" class="mybreadcrumb">
-        <div *ngFor="let s of patchRoute" class="items">
-          <a [routerLink]="['/home/connection']">{{ s !== '-1' ? s : 'nauveau'}}</a><mat-icon>navigate_next</mat-icon>
-        </div>
-      </div> -->
-    <main [@routerTransition]="getState(o)" style="margin: 40px 0 0 5px; overflow: hidden;">
+    <!-- <main [@routerTransition]="getState(o)" style="margin: 40px 0 0 5px; overflow: hidden;">
       <router-outlet #o="outlet"></router-outlet>
+    </main> -->
+
+
+    <main style="margin: 40px 0 0 5px; overflow: hidden;">
+      <mat-tab-group style="overflow: hidden;" headerPosition="top" [selectedIndex]="tabIndex.value"
+        (selectedIndexChange)="tabIndex.setValue($event)">
+        <mat-tab label="Product">
+          <button mat-raised-button color="accent" (click)="tabIndex.setValue(0)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <app-general></app-general>
+
+        </mat-tab>
+
+        <mat-tab label="purchase">
+          <button mat-raised-button color="accent" (click)="tabIndex.setValue(2)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <app-dash></app-dash>
+        </mat-tab>
+
+        <mat-tab label="Panier">
+          <button mat-raised-button color="accent" (click)="tabIndex.setValue(1)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <app-wifi></app-wifi>
+        </mat-tab>
+      </mat-tab-group>
     </main>
 
-    <!-- <footer>
-        <mat-toolbar class="mt-2 text" color="primary">
-          <mat-toolbar-row style="height: 70px">
-            <span style="margin-left: auto; margin-right: auto;"> © {{ d | date:"dd/MMMM/yyyy" }} - Yaasin MOURABIT</span>
-          </mat-toolbar-row>
-        </mat-toolbar>
-      </footer> -->
   </mat-sidenav-content>
 </mat-sidenav-container>

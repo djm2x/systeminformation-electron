@@ -15,3 +15,13 @@
   }
 
 }
+
+.mat-tab-group {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+::ng-deep .mat-tab-labels {
+  display: flex;
+  flex-direction: column;
+}

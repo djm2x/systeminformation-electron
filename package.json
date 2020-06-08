@@ -9,6 +9,7 @@
     "mode-developpement": "------------------------------------------------------------------",
     "f": "cd angular && ng serve",
     "b": "set ELECTRON_ENV=0 && set ELECTRON_ENV_TEST=true && electron --require ts-node/register ./main.ts",
+    "b-n": "set ELECTRON_ENV=0 && set ELECTRON_ENV_TEST=true && electron --require ts-node/register ./main.ts",
     "$postinstall": "bash ./patch.sh",
     "ets": "set ELECTRON_ENV=0 && electron main.js",
     "build-watch": "ng build --extractCss --watch --base-href ./",
@@ -36,14 +37,16 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
-    "systeminformation": "^4.23.3"
+    "electron-reloader": "^1.0.1",
+    "fetch-installed-software": "0.0.6",
+    "systeminformation": "^4.23.3",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "electron-builder": "^22.7.0",
     "@types/node": "^12.11.1",
     "electron": "^9.0.1",
     "ts-node": "~8.3.0",
-    "tslib": "^1.10.0",
     "typescript": "~3.7.5"
   }
 }

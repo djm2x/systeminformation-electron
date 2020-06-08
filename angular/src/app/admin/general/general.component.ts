@@ -12,7 +12,8 @@ export class GeneralComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.intervalId = setInterval(() => this.get(), 1000);
+    // this.intervalId = setInterval(() => this.get(), 1000);
+    this.get();
   }
 
   get() {
