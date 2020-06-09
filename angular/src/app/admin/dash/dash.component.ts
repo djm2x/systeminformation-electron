@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Wifi } from 'src/app/Models/models';
+import { ElectronService } from '../electron.service';
 
 const ipc = (window as any).require('electron').ipcRenderer;
 const remote = (window as any).require('electron').remote;
@@ -12,7 +13,7 @@ const remote = (window as any).require('electron').remote;
 export class DashComponent implements OnInit {
   wifis: Wifi[] = [];
   pages = this.routes;
-  constructor() { }
+  constructor(public service: ElectronService) { }
 
   ngOnInit(): void {
     // this.f();

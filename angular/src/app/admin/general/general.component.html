@@ -1,25 +1,97 @@
 <div class="col-md-12">
   <h3>Informations système</h3>
 
-  <table class="table table-borderless">
+  <table class="table table-borderless w-100" *ngIf="service.infoCostume">
     <tbody>
       <tr>
-        <th>Nom de l'appareil</th>
-        <td class="text-muted">Mark</td>
+        <th>Date/heur du jour</th>
+        <td class="text-muted">{{date | date : "d MMMM yyyy HH:mm:ss"}}</td>
       </tr>
       <tr>
         <th>Nom de l'appareil</th>
-        <td class="text-muted">Mark</td>
+        <td class="text-muted">{{service.infoCostume.name}}</td>
       </tr>
       <tr>
-        <th>Nom de l'appareil</th>
-        <td class="text-muted">Mark</td>
+        <th>Système d'exploitation</th>
+        <td class="text-muted">{{service.infoCostume.system}}</td>
       </tr>
       <tr>
-        <th>Nom de l'appareil</th>
-        <td class="text-muted">Mark</td>
+        <th>Fabricant du système</th>
+        <td class="text-muted">{{service.infoCostume.fabric}}</td>
+      </tr>
+      <tr>
+        <th>Modèle du système</th>
+        <td class="text-muted">{{service.infoCostume.model}}</td>
+      </tr>
+      <tr>
+        <th>BIOS</th>
+        <td class="text-muted">{{service.infoCostume.bios}}</td>
+      </tr>
+      <tr>
+        <th>Processeur</th>
+        <td class="text-muted">{{service.infoCostume.proce}}</td>
       </tr>
 
+      <tr>
+        <th>Mémoire</th>
+        <td class="text-muted">{{service.infoCostume.mem}}MB RAM</td>
+      </tr>
+
+      <tr>
+        <th>Graphique</th>
+        <td class="text-muted" *ngFor="let e of service.infoCostume.graphics; let i=index">
+          <p class="m-0" *ngFor="let e of service.infoCostume.graphics; let i=index">
+            {{i + 1}} - {{e}}
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Disque</th>
+        <td class="text-muted">
+          <p class="m-0" *ngFor="let e of service.infoCostume.disk; let i=index">
+            {{i + 1}} - {{e}}
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Réseau</th>
+        <td class="text-muted">
+          <div class="m-0" *ngFor="let e of service.infoCostume.reseau; let i=index">
+            <!-- {{i + 1}} - {{e}} -->
+            <table class="table table-sm w-100" >
+              <tbody>
+                <tr>
+                  <th>Type</th>
+                  <td class="text-muted">{{e.iface}}</td>
+                </tr>
+                <tr>
+                  <th>Description</th>
+                  <td class="text-muted">{{e.ifaceName}}</td>
+                </tr>
+                <tr>
+                  <th>Adresse physique</th>
+                  <td class="text-muted">{{e.mac}}</td>
+                </tr>
+                <tr>
+                  <th>DHCP activé</th>
+                  <td class="text-muted">{{e.dhcp ? 'Oui' : 'Non'}}</td>
+                </tr>
+                <tr>
+                  <th>Adresse IPv4</th>
+                  <td class="text-muted">{{e.ip4}}</td>
+                </tr>
+                <tr>
+                  <th>Adresse IPv6 locale de lien</th>
+                  <td class="text-muted">{{e.ip6}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <mat-divider></mat-divider>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

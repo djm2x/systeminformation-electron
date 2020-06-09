@@ -1,32 +1,20 @@
-<div class="container mt-5">
+<div class="col-md-12">
+  <h3>Programme</h3>
+  <div *ngIf="service.infoCostume">
 
-
-  <!-- <div class="row justify-content-center align-items-center">
-    <div class="col-md-3 card m-1" style="border-radius: 0;" *ngFor="let e of pages;trackBy: trackByFn; let i=index">
-      <div class=" d-flex justify-content-between align-items-center pt-3 pb-3" [routerLink]="['/admin/wifi']" >
-        <mat-icon class="mb-3" style="font-size: 2em; color: #0F7FD9;">{{e.icon}}</mat-icon>
-        <span style="color: gray;">{{e.name}}</span>
+    <div *ngFor="let e of service.infoCostume.software; let i=index">
+      <div class="row">
+        <div class="col-md-12 m-1" style="box-shadow: 1px 1px 10px #cfcfcf;">
+          <p>{{e.DisplayName}}</p>
+          <p>{{e.InstallLocation}}</p>
+          <p>{{e.InstallDate}}</p>
+          <p>{{e.Publisher}}</p>
+          <p>{{e.DisplayVersion}}</p>
+          <p>{{e.EstimatedSize}}</p>
+        </div>
       </div>
+
+      <!-- <mat-divider></mat-divider> -->
     </div>
-  </div> -->
-
-  <mat-tab-group class="d-flex flex-column" animationDuration="300ms">
-    <mat-tab label="First">
-      <mat-card>
-        <h1>me & you</h1>
-      </mat-card>
-    </mat-tab>
-    <mat-tab label="Second">
-      <mat-card>
-        <h1>me & you</h1>
-      </mat-card>
-    </mat-tab>
-    <mat-tab label="Third">
-      <mat-card>
-        <h1>me & you</h1>
-      </mat-card>
-    </mat-tab>
-  </mat-tab-group>
-
-
+  </div>
 </div>

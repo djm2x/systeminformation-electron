@@ -31,10 +31,12 @@ export class AdminComponent implements OnInit {
   route = this.router.url;
   user = new User();
   pages = this.routes;
+  loadPercent = 0;
+  isDoneGetInfo = false;
   // categories = this.uow.categories.get();
   constructor(public session: SessionService, changeDetectorRef: ChangeDetectorRef
     , public media: MediaMatcher, public router: Router, private uow: UowService
-    , public theme: ThemeService, public myMedia: MediaService, private service: ElectronService) {
+    , public theme: ThemeService, public myMedia: MediaService, public service: ElectronService) {
 
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -54,11 +56,33 @@ export class AdminComponent implements OnInit {
       this.snav.toggle();
     }, 300);
 
-    setTimeout(() => {
-      // this.user = this.session.user;
-      // console.log(this.user);
-      this.get();
-    }, 1000);
+    this.loadingPoucentage();
+
+  }
+
+  loadingPoucentage() {
+    const t = setInterval((e) => {
+
+      if (this.service.isLoadingResults === false) {
+        clearInterval(t);
+
+        const t2 = setInterval(() => {
+          this.loadPercent += 1;
+          if (this.loadPercent === 100) {
+            clearInterval(t2);
+            this.isDoneGetInfo = true;
+            this.loadPercent = 0;
+          }
+        }, 20);
+      }
+
+      if (this.loadPercent === 90 && this.service.isLoadingResults) {
+        this.loadPercent = this.loadPercent;
+      } else {
+        this.loadPercent += 1;
+      }
+    }, 150);
+
 
   }
 
@@ -89,14 +113,6 @@ export class AdminComponent implements OnInit {
     return outlet.activatedRouteData.state;
   }
 
-  get() {
-    console.log('>>>>>>>>>>>>>>>>>>>>>chargement')
-    this.service.get('getInfo').subscribe((r: Res) => {
-      console.log(r);
-      console.log('>>>>>>>>>>>>>>>>>>>>>done')
-    });
-  }
-
   get routes() {
     return [
       { path: '/admin/general', index: 0, name: 'General', icon: 'memory' },
@@ -110,7 +126,7 @@ export class AdminComponent implements OnInit {
       // { path: '/admin/process', index: 0, name: 'Process', icon: 'view_list' },
       // { path: '/admin/disks', index: 0, name: 'Disks / FS', icon: 'storage' },
       // { path: '/admin/network', index: 0, name: 'Network', icon: 'settings_input_hdmi' },
-      { path: '/admin/wifi', index: 0, name: 'Wifi', icon: 'wifi' }
+      // { path: '/admin/wifi', index: 0, name: 'Wifi', icon: 'wifi' }
     ].map((e, i) => {
       e.index = i;
       return e;

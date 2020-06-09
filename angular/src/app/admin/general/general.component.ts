@@ -8,12 +8,14 @@ import { ElectronService } from '../electron.service';
 })
 export class GeneralComponent implements OnInit, OnDestroy {
   intervalId: any;
-  constructor(private service: ElectronService) { }
+  date = new Date();
+  constructor(public service: ElectronService) { }
 
 
   ngOnInit(): void {
     // this.intervalId = setInterval(() => this.get(), 1000);
-    this.get();
+    // this.get();
+    setInterval(() => this.date = new Date(), 1000);
   }
 
   get() {

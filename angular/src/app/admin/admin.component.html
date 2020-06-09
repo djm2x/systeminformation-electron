@@ -1,4 +1,10 @@
+
+
 <mat-toolbar class="mat-elevation-z6">
+  <div class="example-loading-shade" *ngIf="!isDoneGetInfo">
+    <!-- <mat-spinner *ngIf="true"></mat-spinner> -->
+    <mat-progress-bar mode="determinate" [value]="loadPercent"></mat-progress-bar>
+  </div>
   <mat-toolbar-row>
     <button mat-button (click)="snav.toggle()" routerLinkActive="active">
       <mat-icon>menu</mat-icon>

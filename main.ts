@@ -90,12 +90,12 @@ async function getInfo() {
     const all = {
       // generalStaticData: await si.get,
       generalStaticData: await si.getStaticData(),
-      memoire: await si.mem(),
+      // memoire: await si.mem(),
       // system: await si.system(),
       // bios: await si.bios(),
       // baseboard: await si.baseboard(),
       // chassis: await si.chassis(),
-      wifiNetworks: await si.wifiNetworks(),
+      // wifiNetworks: await si.wifiNetworks(),
       softwares: (fis.getAllInstalledSoftwareSync() as any[]).filter(e => !(e.RegistryDirName as string).startsWith(`{`)),
     };
     console.log('call 2')

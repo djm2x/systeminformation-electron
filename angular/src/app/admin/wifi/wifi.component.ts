@@ -13,7 +13,7 @@ export class WifiComponent implements OnInit {
 
   ngOnInit(): void {
     // setInterval(() => this.get(), 1000);
-    this.get2()
+    // this.get2()
   }
 
   get() {
