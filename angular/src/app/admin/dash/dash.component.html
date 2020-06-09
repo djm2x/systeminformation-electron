@@ -1,13 +1,13 @@
 <div class="col-md-12">
   <section class="mb-2 mt-2 d-flex align-items-center">
-    <h3>Programme</h3>&nbsp;<span>({{service.infoCostume.software.length}})</span>
+    <h3>Programme</h3>&nbsp;<span>({{service.infoCostume?.software.length}})</span>
   </section>
   <mat-divider></mat-divider>
   <div *ngIf="service.infoCostume">
     <div *ngFor="let e of service.infoCostume.software; let i=index">
-      <div class="row mt-3">
-        <div class="col-md-12 m-1" style="box-shadow: 1px 1px 10px #cfcfcf;">
-          <table class="table table-borderless table-sm w-100" *ngIf="service.infoCostume">
+      <div class="row mt-1 ">
+        <div class="col-md-12 m-1 mycard">
+          <table class="table table-borderless table-sm w-100 m-0" *ngIf="service.infoCostume">
             <tbody>
               <tr *ngIf="e.DisplayName"><th>DisplayName</th><td class="text-muted">{{e.DisplayName}} - <b>({{e.Publisher}})</b></td></tr>
               <tr *ngIf="e.RegistryDirName"><th>RegistryDirName</th><td class="text-muted">{{e.RegistryDirName}}</td></tr>

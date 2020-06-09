@@ -10,3 +10,11 @@ tr {
 .table-sm {
   font-size: .8em;
 }
+
+.mycard {
+  box-shadow: 1px 1px 10px #cfcfcf;
+  &:hover {
+    box-shadow: 1px 5px 30px #cccccc;
+    background-color: white;
+  }
+}
