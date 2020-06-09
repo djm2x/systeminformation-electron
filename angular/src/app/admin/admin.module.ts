@@ -7,7 +7,6 @@ import { AdminComponent } from './admin.component';
 import { MatModule } from '../mat.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { GeneralComponent } from './general/general.component';
-import { MemoryComponent } from './memory/memory.component';
 import { DashComponent } from './dash/dash.component';
 import { WifiComponent } from './wifi/wifi.component';
 
@@ -15,7 +14,6 @@ import { WifiComponent } from './wifi/wifi.component';
   declarations: [
     AdminComponent,
     GeneralComponent,
-    MemoryComponent,
     DashComponent,
     WifiComponent,
   ],

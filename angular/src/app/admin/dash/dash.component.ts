@@ -16,11 +16,16 @@ export class DashComponent implements OnInit {
   constructor(public service: ElectronService) { }
 
   ngOnInit(): void {
+
     // this.f();
     // setInterval(() => this.wifi(), 1000);
 
 
     // console.log('ddddddddd')
+  }
+
+  hexToDecimal(hex: string) {
+    return (parseInt(hex, 16) / 1024).toFixed(0);
   }
 
   f() {
@@ -35,7 +40,7 @@ export class DashComponent implements OnInit {
   wifi() {
     // remote.getCurrentWindow().reload();
     ipc.prependOnceListener('angular', (event, r: Wifi[]) => {
-      this.wifis = r.sort((a, b) => b.quality - a.quality );
+      this.wifis = r.sort((a, b) => b.quality - a.quality);
     });
 
     ipc.send('wifi');

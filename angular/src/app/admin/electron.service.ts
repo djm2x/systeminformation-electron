@@ -11,59 +11,58 @@ const remote = (window as any).require('electron').remote;
 })
 export class ElectronService {
 
-  info: Res = null;
+  // info: Res = null;
   isLoadingResults = false;
-  infoCostume: {
-    name: string;
-    system: string;
-    fabric: string;
-    model: string;
-    bios: string;
-    proce: string;
-    mem: number;
-    graphics: string[];
-    disk: string[];
-    reseau: {
-      iface: string;
-      ifaceName: string;
-      ip4: string;
-      ip6: string;
-      mac: string;
-      dhcp: boolean;
-    }[];
-    software: {
-      DisplayIcon: string,
-      RegistryDirName: string;
-      DisplayName: string;
-      DisplayVersion: string;
-      InstallLocation: string;
-      InstallDate: string;
-      Publisher: string;
-      EstimatedSize: string;
-    }[];
-  } = null;
+  infoCostume: IInfoCostume = null;
 
   constructor() {
+    const r = sessionStorage.getItem('infoCostume');
+    
+    r ? this.infoCostume = JSON.parse(r).data.infoCostume : this.getAll();
+  }
+
+  setSession(infoCostume: IInfoCostume) {
+    const today = new Date();
+    const expires = new Date();
+    expires.setDate(today.getDate() + 7);
+
+    const sessionObject = {
+      expiresAt: expires,
+      data: { infoCostume },
+    };
+    sessionStorage.setItem('infoCostume', JSON.stringify(sessionObject));
+  }
+
+  // getSession(key: string = 'infoCostume') {
+  //   const r = sessionStorage.getItem(key);
+  //   if (r) {
+  //     this.infoCostume = JSON.parse(r);
+  //   } else {
+  //     this.getAll();
+  //   }
+  // }
+
+  getAll() {
     console.log('>>>>>>>>>>>>>>>>>>>>charger');
     this.isLoadingResults = true;
     this.get('getInfo').subscribe((r: Res) => {
 
-      this.info = r;
+      r = r;
       this.infoCostume = {
-        proce: `${this.info.generalStaticData.cpu.manufacturer} ${this.info.generalStaticData.cpu.brand} CPU @ ${this.info.generalStaticData.cpu.speed}GHz (${this.info.generalStaticData.cpu.cores} CPUs)`,
-        name: this.info.generalStaticData.os.hostname,
-        system: `${this.info.generalStaticData.os.distro} ${this.info.generalStaticData.os.arch} bits (${this.info.generalStaticData.os.release})`,
-        disk: this.info.generalStaticData.diskLayout.map(e => `${e.name} (${e.type}) ${+(e.size / 1024 / 1024 / 1024).toFixed(0)} Go`),
-        mem: this.info.generalStaticData.memLayout.map(e => e.size).reduce((p, c) => p + c) / 1024 / 1024,
-        model: this.info.generalStaticData.system.model,
-        fabric: this.info.generalStaticData.system.manufacturer,
-        bios: `${this.info.generalStaticData.bios.version} - ver : ${this.info.generalStaticData.bios.releaseDate}`,
-        graphics: this.info.generalStaticData.graphics.controllers.map(e => `${e.model} ${e.vram} Mo`),
-        reseau: this.info.generalStaticData.net.filter(e => e.operstate.includes('up'))
+        proce: `${r.generalStaticData.cpu.manufacturer} ${r.generalStaticData.cpu.brand} CPU @ ${r.generalStaticData.cpu.speed}GHz (${r.generalStaticData.cpu.cores} CPUs)`,
+        name: r.generalStaticData.os.hostname,
+        system: `${r.generalStaticData.os.distro} ${r.generalStaticData.os.arch} bits (${r.generalStaticData.os.release})`,
+        disk: r.generalStaticData.diskLayout.map(e => `${e.name} (${e.type}) ${+(e.size / 1024 / 1024 / 1024).toFixed(0)} Go`),
+        mem: r.generalStaticData.memLayout.map(e => e.size).reduce((p, c) => p + c) / 1024 / 1024,
+        model: r.generalStaticData.system.model,
+        fabric: r.generalStaticData.system.manufacturer,
+        bios: `${r.generalStaticData.bios.version} - ver : ${r.generalStaticData.bios.releaseDate}`,
+        graphics: r.generalStaticData.graphics.controllers.map(e => `${e.model} ${e.vram} Mo`),
+        reseau: r.generalStaticData.net.filter(e => e.operstate.includes('up'))
           .map(e => {
-            return { iface: e.iface, ifaceName: e.ifaceName, ip4: e.ip4, ip6: e.ip6, mac: e.mac, dhcp: e.dhcp};
+            return { iface: e.iface, ifaceName: e.ifaceName, ip4: e.ip4, ip6: e.ip6, mac: e.mac, dhcp: e.dhcp };
           }),
-        software: this.info.softwares,
+        software: r.softwares.filter(e => e.DisplayName), 
       };
 
       console.log(r);
@@ -71,9 +70,10 @@ export class ElectronService {
 
       console.log('>>>>>>>>>>>>>>>>>>>>>done');
       this.isLoadingResults = false;
+
+      this.setSession(this.infoCostume);
     });
   }
-
 
   get(route: string): Observable<any | any[]> {
     ipc.send(route);
@@ -99,5 +99,35 @@ export interface Res {
     InstallDate: string,
     Publisher: string,
     EstimatedSize: string,
+  }[];
+}
+
+export interface IInfoCostume {
+  name: string;
+  system: string;
+  fabric: string;
+  model: string;
+  bios: string;
+  proce: string;
+  mem: number;
+  graphics: string[];
+  disk: string[];
+  reseau: {
+    iface: string;
+    ifaceName: string;
+    ip4: string;
+    ip6: string;
+    mac: string;
+    dhcp: boolean;
+  }[];
+  software: {
+    DisplayIcon: string,
+    RegistryDirName: string;
+    DisplayName: string;
+    DisplayVersion: string;
+    InstallLocation: string;
+    InstallDate: string;
+    Publisher: string;
+    EstimatedSize: string;
   }[];
 }

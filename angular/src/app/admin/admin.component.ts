@@ -73,7 +73,7 @@ export class AdminComponent implements OnInit {
             this.isDoneGetInfo = true;
             this.loadPercent = 0;
           }
-        }, 20);
+        }, 10);
       }
 
       if (this.loadPercent === 90 && this.service.isLoadingResults) {
@@ -111,6 +111,12 @@ export class AdminComponent implements OnInit {
   getState(outlet: RouterOutlet) {
     // console.log(outlet)
     return outlet.activatedRouteData.state;
+  }
+
+  reset() {
+    this.service.getAll();
+    this.isDoneGetInfo = false;
+    this.loadingPoucentage();
   }
 
   get routes() {
