@@ -12,7 +12,7 @@ const remote = (window as any).require('electron').remote;
 })
 export class DashComponent implements OnInit {
   wifis: Wifi[] = [];
-  pages = this.routes;
+  // pages = this.routes;
   constructor(public service: ElectronService) { }
 
   ngOnInit(): void {
@@ -45,20 +45,20 @@ export class DashComponent implements OnInit {
     return index; // or item.id
   }
 
-  get routes() {
-    return [
-      { path: '/admin/system', name: 'System', icon: 'view_list' },
-      { path: '/admin/cpu', name: 'CPU', icon: 'view_list' },
-      { path: '/admin/general', name: 'General', icon: 'view_list' },
-      { path: '/admin/memory', name: 'Memory', icon: 'memory' },
-      { path: '/admin/battery', name: 'Battery', icon: 'battery_std' },
-      { path: '/admin/graphics', name: 'Graphics', icon: 'view_list' },
-      { path: '/admin/os', name: 'OS', icon: 'power_settings_new' },
-      { path: '/admin/process', name: 'Process', icon: 'view_list' },
-      { path: '/admin/disks', name: 'Disks / FS', icon: 'storage' },
-      { path: '/admin/network', name: 'Network', icon: 'settings_input_hdmi' },
-      { path: '/admin/wifi', name: 'Wifi', icon: 'wifi' }
-    ];
-  }
+  // get routes() {
+  //   return [
+  //     { path: '/admin/system', name: 'System', icon: 'view_list' },
+  //     { path: '/admin/cpu', name: 'CPU', icon: 'view_list' },
+  //     { path: '/admin/general', name: 'General', icon: 'view_list' },
+  //     { path: '/admin/memory', name: 'Memory', icon: 'memory' },
+  //     { path: '/admin/battery', name: 'Battery', icon: 'battery_std' },
+  //     { path: '/admin/graphics', name: 'Graphics', icon: 'view_list' },
+  //     { path: '/admin/os', name: 'OS', icon: 'power_settings_new' },
+  //     { path: '/admin/process', name: 'Process', icon: 'view_list' },
+  //     { path: '/admin/disks', name: 'Disks / FS', icon: 'storage' },
+  //     { path: '/admin/network', name: 'Network', icon: 'settings_input_hdmi' },
+  //     { path: '/admin/wifi', name: 'Wifi', icon: 'wifi' }
+  //   ];
+  // }
 
 }

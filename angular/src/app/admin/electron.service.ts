@@ -13,6 +13,7 @@ export class ElectronService {
 
   info: Res = null;
   isLoadingResults = false;
+  systemSerial = '';
   infoCostume: {
     name: string;
     system: string;
@@ -49,6 +50,7 @@ export class ElectronService {
     this.get('getInfo').subscribe((r: Res) => {
 
       this.info = r;
+      this.systemSerial = r.generalStaticData.system.serial;
       this.infoCostume = {
         proce: `${this.info.generalStaticData.cpu.manufacturer} ${this.info.generalStaticData.cpu.brand} CPU @ ${this.info.generalStaticData.cpu.speed}GHz (${this.info.generalStaticData.cpu.cores} CPUs)`,
         name: this.info.generalStaticData.os.hostname,
