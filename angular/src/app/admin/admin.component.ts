@@ -11,6 +11,7 @@ import { User } from '../Models/models';
 import { routerTransition } from '../shared/animations';
 import { FormControl } from '@angular/forms';
 import { ElectronService } from './electron.service';
+import { ApiService } from './api.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -35,7 +36,7 @@ export class AdminComponent implements OnInit {
   isDoneGetInfo = false;
   // categories = this.uow.categories.get();
   constructor(public session: SessionService, changeDetectorRef: ChangeDetectorRef
-    , public media: MediaMatcher, public router: Router, private uow: UowService
+    , public media: MediaMatcher, public router: Router, private api: ApiService
     , public theme: ThemeService, public myMedia: MediaService, public service: ElectronService) {
 
 
@@ -58,6 +59,12 @@ export class AdminComponent implements OnInit {
 
     this.loadingPoucentage();
 
+  }
+
+  post() {
+    this.api.post().subscribe(r => {
+      console.log(r);
+    })
   }
 
   loadingPoucentage() {

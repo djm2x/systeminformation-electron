@@ -4,7 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-const port = '3001';
+const port = '5000';
 const host = 'http://localhost';
 
 const apiUrl = `${host}:${port}/api`;
@@ -14,11 +14,11 @@ const providers: StaticProvider[] = [
   // { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
   {
     provide: 'BASE_URL',
-    useValue: environment.production ? window.location.origin : url
+    useValue: environment.production ? 'https://gestion-material.herokuapp.com' : url,
   },
   {
     provide: 'API_URL',
-    useValue: environment.production ? `${window.location.origin}/api` : apiUrl
+    useValue: environment.production ? `https://gestion-material.herokuapp.com/api` : apiUrl,
   }
 ];
 
