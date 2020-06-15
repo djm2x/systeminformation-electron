@@ -1,45 +1,66 @@
-<div class="col-md-12">
-  <h3>Informations système</h3>
+<div #infoSystemeHtml class="col-md-12">
+  <style>
+    tr th {
+      width: 30%;
+      padding: 2px 0 !important;
+    }
 
-  <table class="table table-borderless w-100" *ngIf="service.infoCostume">
+    tr td {
+      padding: 4px 0 !important;
+    }
+
+    .table-sm {
+      font-size: .8em;
+    }
+
+    table {
+      font-size: .9em;
+    }
+  </style>
+  <section class="mb-2 mt-2">
+    <h3>Informations système</h3>
+  </section>
+  <mat-divider></mat-divider>
+
+  <table class="table table-borderless w-100 mt-3" *ngIf="service.infoCostume">
     <tbody>
       <tr>
-        <th>Date/heur du jour</th>
+        <td>Date/heur du jour</td>
         <td class="text-muted">{{date | date : "d MMMM yyyy HH:mm:ss"}}</td>
       </tr>
       <tr>
-        <th>Nom de l'appareil</th>
+        <td>Nom de l'appareil</td>
         <td class="text-muted">{{service.infoCostume.name}}</td>
       </tr>
       <tr>
-        <th>Système d'exploitation</th>
+        <td>Système d'exploitation</td>
         <td class="text-muted">{{service.infoCostume.system}}</td>
       </tr>
       <tr>
-        <th>Fabricant du système</th>
+        <td>Fabricant du système</td>
         <td class="text-muted">{{service.infoCostume.fabric}}</td>
       </tr>
       <tr>
-        <th>Modèle du système</th>
+        <td>Modèle du système</td>
         <td class="text-muted">{{service.infoCostume.model}}</td>
       </tr>
       <tr>
-        <th>BIOS</th>
+        <td>BIOS</td>
         <td class="text-muted">{{service.infoCostume.bios}}</td>
       </tr>
       <tr>
-        <th>Processeur</th>
+        <td>Processeur</td>
         <td class="text-muted">{{service.infoCostume.proce}}</td>
       </tr>
 
       <tr>
-        <th>Mémoire</th>
+        <td>Mémoire</td>
         <td class="text-muted">{{service.infoCostume.mem}}MB RAM</td>
       </tr>
 
       <tr>
-        <th>Graphique</th>
-        <td class="text-muted" *ngFor="let e of service.infoCostume.graphics; let i=index">
+        <td>Graphique</td>
+        <td class="text-muted">
           <p class="m-0" *ngFor="let e of service.infoCostume.graphics; let i=index">
             {{i + 1}} - {{e}}
           </p>
@@ -47,7 +68,7 @@
       </tr>
 
       <tr>
-        <th>Disque</th>
+        <td>Disque</td>
         <td class="text-muted">
           <p class="m-0" *ngFor="let e of service.infoCostume.disk; let i=index">
             {{i + 1}} - {{e}}
@@ -56,34 +77,34 @@
       </tr>
 
       <tr>
-        <th>Réseau</th>
+        <td>Réseau</td>
         <td class="text-muted">
           <div class="m-0" *ngFor="let e of service.infoCostume.reseau; let i=index">
             <!-- {{i + 1}} - {{e}} -->
-            <table class="table table-sm w-100" >
+            <table class="table table-sm w-100">
               <tbody>
                 <tr>
-                  <th>Type</th>
+                  <td>Type</td>
                   <td class="text-muted">{{e.iface}}</td>
                 </tr>
                 <tr>
-                  <th>Description</th>
+                  <td>Description</td>
                   <td class="text-muted">{{e.ifaceName}}</td>
                 </tr>
                 <tr>
-                  <th>Adresse physique</th>
+                  <td>Adresse physique</td>
                   <td class="text-muted">{{e.mac}}</td>
                 </tr>
                 <tr>
-                  <th>DHCP activé</th>
+                  <td>DHCP activé</td>
                   <td class="text-muted">{{e.dhcp ? 'Oui' : 'Non'}}</td>
                 </tr>
                 <tr>
-                  <th>Adresse IPv4</th>
+                  <td>Adresse IPv4</td>
                   <td class="text-muted">{{e.ip4}}</td>
                 </tr>
                 <tr>
-                  <th>Adresse IPv6 locale de lien</th>
+                  <td>Adresse IPv6 locale de lien</td>
                   <td class="text-muted">{{e.ip6}}</td>
                 </tr>
               </tbody>

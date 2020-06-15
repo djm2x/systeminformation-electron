@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Wifi } from 'src/app/Models/models';
 import { ElectronService } from '../electron.service';
 
@@ -10,17 +10,34 @@ const remote = (window as any).require('electron').remote;
   templateUrl: './dash.component.html',
   styleUrls: ['./dash.component.scss']
 })
-export class DashComponent implements OnInit {
+export class DashComponent implements OnInit, AfterViewInit {
+  @ViewChild('softwareHtml') softwareHtml: ElementRef;
   wifis: Wifi[] = [];
   // pages = this.routes;
   constructor(public service: ElectronService) { }
 
   ngOnInit(): void {
+
     // this.f();
     // setInterval(() => this.wifi(), 1000);
 
 
     // console.log('ddddddddd')
+
+  }
+
+  ngAfterViewInit(){
+
+    this.service.isLoadingResults.subscribe(r => {
+      if (r === false) {
+        this.service.o.softwareHtml = this.softwareHtml.nativeElement.innerHTML;
+      }
+    });
+
+  }
+
+  hexToDecimal(hex: string) {
+    return (parseInt(hex, 16) / 1024).toFixed(0);
   }
 
   f() {
@@ -35,7 +52,7 @@ export class DashComponent implements OnInit {
   wifi() {
     // remote.getCurrentWindow().reload();
     ipc.prependOnceListener('angular', (event, r: Wifi[]) => {
-      this.wifis = r.sort((a, b) => b.quality - a.quality );
+      this.wifis = r.sort((a, b) => b.quality - a.quality);
     });
 
     ipc.send('wifi');

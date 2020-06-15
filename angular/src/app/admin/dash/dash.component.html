@@ -1,16 +1,54 @@
-<div class="col-md-12">
-  <h3>Programme</h3>
-  <div *ngIf="service.infoCostume">
+<div #softwareHtml class="col-md-12">
+  <style>
 
+    tr  th {
+      width: 30%; padding: 1px 0 !important;
+    }
+
+    tr td {
+      width: 70%; padding: 1px 0 !important;
+    }
+
+    .table-sm {
+      font-size: .8em;
+    }
+
+    .mycard {
+      box-shadow: 1px 1px 10px #cfcfcf;
+    }
+
+    .mycard:hover {
+        box-shadow: 1px 5px 30px #cccccc;
+        background-color: white;
+      }
+    }
+  </style>
+  <section class="mb-2 mt-2 d-flex align-items-center">
+    <h3>Programme</h3>&nbsp;<span>({{service.infoCostume?.software.length}})</span>
+  </section>
+  <mat-divider></mat-divider>
+  <div *ngIf="service.infoCostume">
     <div *ngFor="let e of service.infoCostume.software; let i=index">
-      <div class="row">
-        <div class="col-md-12 m-1" style="box-shadow: 1px 1px 10px #cfcfcf;">
-          <p>{{e.DisplayName}}</p>
+      <div class="row mt-1 ">
+        <div class="col-md-12 m-1 mycard">
+          <table class="table table-borderless table-sm w-100 m-0" *ngIf="service.infoCostume">
+            <tbody>
+              <tr *ngIf="e.DisplayName"><th>DisplayName</th><td class="text-muted">{{e.DisplayName}} - <b>({{e.Publisher}})</b></td></tr>
+              <tr *ngIf="e.RegistryDirName"><th>RegistryDirName</th><td class="text-muted">{{e.RegistryDirName}}</td></tr>
+              <tr *ngIf="e.InstallLocation"><th>InstallLocation</th><td class="text-muted">{{e.InstallLocation}}</td></tr>
+              <tr *ngIf="e.InstallDate"><th>InstallDate</th><td class="text-muted">{{e.InstallDate}}</td></tr>
+              <!-- <tr *ngIf="e.Publisher"><th>Publisher</th><td class="text-muted">{{e.Publisher}}</td></tr> -->
+              <tr *ngIf="e.DisplayVersion"><th>DisplayVersion</th><td class="text-muted">{{e.DisplayVersion}}</td></tr>
+              <tr *ngIf="e.EstimatedSize"><th>EstimatedSize</th><td class="text-muted">{{hexToDecimal(e.EstimatedSize)}} Mo</td></tr>
+            </tbody>
+          </table>
+          <!-- <p>{{e | json}}</p>  -->
+          <!-- <p>{{e.DisplayName}}</p>
           <p>{{e.InstallLocation}}</p>
           <p>{{e.InstallDate}}</p>
           <p>{{e.Publisher}}</p>
           <p>{{e.DisplayVersion}}</p>
-          <p>{{e.EstimatedSize}}</p>
+          <p>{{e.EstimatedSize ? hexToDecimal(e.EstimatedSize) : ''}}</p> -->
         </div>
       </div>
 

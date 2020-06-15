@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ElectronService } from '../electron.service';
 
 @Component({
@@ -6,7 +6,8 @@ import { ElectronService } from '../electron.service';
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.scss']
 })
-export class GeneralComponent implements OnInit, OnDestroy {
+export class GeneralComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('infoSystemeHtml') infoSystemeHtml: ElementRef;
   intervalId: any;
   date = new Date();
   constructor(public service: ElectronService) { }
@@ -16,6 +17,16 @@ export class GeneralComponent implements OnInit, OnDestroy {
     // this.intervalId = setInterval(() => this.get(), 1000);
     // this.get();
     setInterval(() => this.date = new Date(), 1000);
+  }
+
+  ngAfterViewInit(){
+
+    this.service.isLoadingResults.subscribe(r => {
+      if (r === false) {
+        this.service.o.infoSystemeHtml = this.infoSystemeHtml.nativeElement.innerHTML;
+      }
+    });
+
   }
 
   get() {

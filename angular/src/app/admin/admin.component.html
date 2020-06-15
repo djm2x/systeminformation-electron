@@ -17,22 +17,32 @@
     <!-- <button mat-button matTooltip="Theme" [matMenuTriggerFor]="menuT" style="margin-right: 5px;">
       <mat-icon>format_color_fill</mat-icon>
     </button> -->
-    <mat-menu #menuT="matMenu">
+    <!-- <mat-menu #menuT="matMenu">
       <button mat-menu-item (click)="changeTheme('dark-theme')">
         <mat-icon style="color: black;">color_lens</mat-icon><strong>Dark</strong>
       </button>
       <button mat-menu-item (click)="changeTheme('default-theme')">
         <mat-icon style="color: #1976d2;">color_lens</mat-icon><strong>Light</strong>
       </button>
-    </mat-menu>
+    </mat-menu> -->
 
-    <button mat-raised-button color="primary" [matMenuTriggerFor]="beforeMenu">
+    <!-- <button mat-icon-button color="primary" (click)="post()">
+      <mat-icon>send</mat-icon>
+    </button> -->
+
+    <button mat-icon-button color="primary" (click)="reset()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+
+
+
+    <!-- <button mat-raised-button color="primary" [matMenuTriggerFor]="beforeMenu">
       (me)
 
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="disconnect()">Déconnecter</button>
-    </mat-menu>
+    </mat-menu> -->
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -40,17 +50,27 @@
   <mat-sidenav #snav [mode]="(!mobileQuery.matches) ? 'side' : 'push'" [opened]="opened && !mobileQuery.matches"
     [fixedInViewport]="true" fixedTopGap="40">
     <mat-nav-list class="list" style="width: 160px; padding: 0;">
-      <mat-list-item (click)="tabIndex.setValue(1)">
+      <!-- <mat-list-item (click)="tabIndex.setValue(1)">
         <mat-icon>home</mat-icon>&nbsp;<span>Acceuil</span>
         <mat-divider></mat-divider>
-      </mat-list-item>
+      </mat-list-item> -->
 
       <mat-list-item *ngFor="let e of pages" (click)="tabIndex.setValue(e.index)"
         [ngClass]="{'router-link-active': e.index === tabIndex.value}">
         <mat-icon>{{e.icon}}</mat-icon>&nbsp;<span>{{e.name}}</span>
       </mat-list-item>
 
+
+
     </mat-nav-list>
+
+    <mat-form-field appearance="fill" class="col-md-12" style="margin-top: auto;">
+      <mat-label>Time</mat-label>
+      <input matInput type="number" #time value="1000" required>
+      <button mat-icon-button matSuffix (click)="post(time.value)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
   </mat-sidenav>
   <mat-sidenav-content>
 
@@ -63,26 +83,19 @@
       <mat-tab-group style="overflow: hidden;" headerPosition="top" [selectedIndex]="tabIndex.value"
         (selectedIndexChange)="tabIndex.setValue($event)">
         <mat-tab label="Product">
-          <button mat-raised-button color="accent" (click)="tabIndex.setValue(0)">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
           <app-general></app-general>
-
         </mat-tab>
 
         <mat-tab label="purchase">
-          <button mat-raised-button color="accent" (click)="tabIndex.setValue(2)">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
           <app-dash></app-dash>
         </mat-tab>
 
-        <mat-tab label="Panier">
+        <!-- <mat-tab label="Panier">
           <button mat-raised-button color="accent" (click)="tabIndex.setValue(1)">
             <mat-icon>arrow_back</mat-icon>
           </button>
           <app-wifi></app-wifi>
-        </mat-tab>
+        </mat-tab> -->
       </mat-tab-group>
     </main>
 

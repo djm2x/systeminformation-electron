@@ -11,6 +11,8 @@ import { User } from '../Models/models';
 import { routerTransition } from '../shared/animations';
 import { FormControl } from '@angular/forms';
 import { ElectronService } from './electron.service';
+import { ApiService } from './api.service';
+import { EquipementInfo } from './models';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -32,10 +34,11 @@ export class AdminComponent implements OnInit {
   user = new User();
   pages = this.routes;
   loadPercent = 0;
+  isLoading = false;
   isDoneGetInfo = false;
   // categories = this.uow.categories.get();
   constructor(public session: SessionService, changeDetectorRef: ChangeDetectorRef
-    , public media: MediaMatcher, public router: Router, private uow: UowService
+    , public media: MediaMatcher, public router: Router, private api: ApiService
     , public theme: ThemeService, public myMedia: MediaService, public service: ElectronService) {
 
 
@@ -58,12 +61,31 @@ export class AdminComponent implements OnInit {
 
     this.loadingPoucentage();
 
+    this.service.isLoadingResults.subscribe(r => {
+      this.isLoading = r;
+    });
+
+    // this.post(1000);
+
   }
 
-  loadingPoucentage() {
-    const t = setInterval((e) => {
+  post(time: number) {
+    setTimeout(() => {
+      const o: EquipementInfo = this.service.o;
+      if (o.infoSystemeHtml !== '' && o.softwareHtml !== '') {
+        o.date = new Date();
+        this.api.post(o).subscribe(r => {
+          console.log('post done', r);
+        });
+      }
 
-      if (this.service.isLoadingResults === false) {
+    }, time)
+
+  }
+
+   loadingPoucentage() {
+    const t = setInterval((e) => {
+      if (this.isLoading === false) {
         clearInterval(t);
 
         const t2 = setInterval(() => {
@@ -73,10 +95,10 @@ export class AdminComponent implements OnInit {
             this.isDoneGetInfo = true;
             this.loadPercent = 0;
           }
-        }, 20);
+        }, 10);
       }
 
-      if (this.loadPercent === 90 && this.service.isLoadingResults) {
+      if (this.loadPercent === 90 && this.isLoading) {
         this.loadPercent = this.loadPercent;
       } else {
         this.loadPercent += 1;
@@ -111,6 +133,12 @@ export class AdminComponent implements OnInit {
   getState(outlet: RouterOutlet) {
     // console.log(outlet)
     return outlet.activatedRouteData.state;
+  }
+
+  reset() {
+    this.service.getAll();
+    this.isDoneGetInfo = false;
+    this.loadingPoucentage();
   }
 
   get routes() {
