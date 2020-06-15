@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
 
-    "outDir": "./", // <-- Note that we're making electron parallel to the app.
+    "outDir": "./dist", // <-- Note that we're making electron parallel to the app.
     "sourceMap": false,
     "module": "commonjs",
 

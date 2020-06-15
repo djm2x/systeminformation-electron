@@ -1,7 +1,7 @@
 {
   "name": "electron",
   "version": "0.0.0",
-  "main": "main.js",
+  "main": "./dist/main.js",
   "scripts": {
     "pi": "electron-builder install-app-deps",
     "i-electron": "npm i electron --ia32 -D",
