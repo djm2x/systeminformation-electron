@@ -14,7 +14,7 @@
     "ets": "set ELECTRON_ENV=0 && electron main.js",
     "build-watch": "ng build --extractCss --watch --base-href ./",
     "electron:serve": "npm run ets && nodemon --watch ./main.ts --exec \"npm run ets\"",
-    "s": "electron ./portable8-win32-x64/resources/app/main.js",
+    "s": "electron ./dist/main.js",
     "dev": "concurrently \"ng serve\" \"npm run ets\"",
     "mode-production": "---------------------------------------------------------------------",
     "angular-dist": "electron --require ts-node/register ./main.ts",
@@ -36,16 +36,17 @@
   },
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
-    "electron-reloader": "^1.0.1",
     "fetch-installed-software": "0.0.6",
     "systeminformation": "^4.23.3",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "electron-builder": "^22.7.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/node": "^12.11.1",
     "electron": "^9.0.1",
+    "electron-builder": "^22.7.0",
+    "electron-reloader": "^1.0.1",
+    "fs-extra": "^9.0.1",
     "ts-node": "~8.3.0",
     "typescript": "~3.7.5"
   }

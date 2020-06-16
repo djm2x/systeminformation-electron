@@ -9,6 +9,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { GeneralComponent } from './general/general.component';
 import { DashComponent } from './dash/dash.component';
 import { WifiComponent } from './wifi/wifi.component';
+import { SheetbottomComponent } from './sheetbottom/sheetbottom.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { WifiComponent } from './wifi/wifi.component';
     GeneralComponent,
     DashComponent,
     WifiComponent,
+    SheetbottomComponent,
   ],
   imports: [
     CommonModule,

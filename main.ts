@@ -32,10 +32,13 @@ function createWindow() {
   // Initialize the window to our specified dimensions
   const prod = !dev;
   mainWindow = new BrowserWindow({
-    width: 1700,
-    height: 1000,
+    width: 1000,
+    height: 800,
+    // backgroundColor: '#303030',
     transparent: prod,
+    titleBarStyle: 'customButtonsOnHover',
     frame: dev,
+    // show: false,
     // icon: __dirname + 'icon.png',
     webPreferences: {
       nodeIntegration: true

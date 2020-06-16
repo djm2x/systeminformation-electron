@@ -13,6 +13,9 @@ import { FormControl } from '@angular/forms';
 import { ElectronService } from './electron.service';
 import { ApiService } from './api.service';
 import { EquipementInfo } from './models';
+import { TitleBarService } from '../shared/title-bar.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { SheetbottomComponent } from './sheetbottom/sheetbottom.component';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -20,26 +23,22 @@ import { EquipementInfo } from './models';
   animations: [routerTransition],
 })
 export class AdminComponent implements OnInit {
-  @ViewChild('btndev', { static: true }) btndev: MatButton;
+
   @ViewChild('snav', { static: true }) snav: any;
-  keyDevTools = '';
-  panelOpenState = false;
+
   mobileQuery: MediaQueryList;
   tabIndex = new FormControl(0);
   opened = false;
-  idRole = -1;
-  isConnected = false;
-  // montantCaisse = this.s.notify;
-  route = this.router.url;
-  user = new User();
+
   pages = this.routes;
   loadPercent = 0;
   isLoading = false;
   isDoneGetInfo = false;
-  // categories = this.uow.categories.get();
+
   constructor(public session: SessionService, changeDetectorRef: ChangeDetectorRef
     , public media: MediaMatcher, public router: Router, private api: ApiService
-    , public theme: ThemeService, public myMedia: MediaService, public service: ElectronService) {
+    , public theme: ThemeService, public myMedia: MediaService, public service: ElectronService
+    , private titleBar: TitleBarService, private bottomSheet: MatBottomSheet) {
 
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -47,15 +46,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this.myMedia.windowSizeChanged.subscribe(r => {
-    //   console.log(r)
-    // })
-
-    // this.getRoute();
     setTimeout(() => {
-      // this.user = this.session.user;
-      // console.log(this.user);
       this.snav.toggle();
     }, 300);
 
@@ -64,24 +55,9 @@ export class AdminComponent implements OnInit {
     this.service.isLoadingResults.subscribe(r => {
       this.isLoading = r;
     });
-
-    // this.post(1000);
-
   }
 
-  post(time: number) {
-    setTimeout(() => {
-      const o: EquipementInfo = this.service.o;
-      if (o.infoSystemeHtml !== '' && o.softwareHtml !== '') {
-        o.date = new Date();
-        this.api.post(o).subscribe(r => {
-          console.log('post done', r);
-        });
-      }
 
-    }, time)
-
-  }
 
    loadingPoucentage() {
     const t = setInterval((e) => {
@@ -108,33 +84,6 @@ export class AdminComponent implements OnInit {
 
   }
 
-  changeTheme(theme) {
-    this.theme.changeTheme(theme)
-  }
-
-  get patchRoute() { return this.route.split('/'); }
-
-  getRoute() {
-    this.router.events.subscribe(route => {
-      if (route instanceof NavigationStart) {
-        this.route = route.url;
-        console.log(this.route);
-      }
-    });
-  }
-
-
-
-  disconnect() {
-    this.router.navigate(['/auth']);
-    this.session.doSignOut();
-  }
-
-  getState(outlet: RouterOutlet) {
-    // console.log(outlet)
-    return outlet.activatedRouteData.state;
-  }
-
   reset() {
     this.service.getAll();
     this.isDoneGetInfo = false;
@@ -159,6 +108,14 @@ export class AdminComponent implements OnInit {
       e.index = i;
       return e;
     });
+  }
+
+  do(action) {
+    this.titleBar.post(action);
+  }
+
+  openDialog() {
+    this.bottomSheet.open(SheetbottomComponent, { data: 'me', });
   }
 }
 

@@ -1,0 +1,31 @@
+<mat-nav-list>
+  <div>
+    <mat-form-field appearance="fill" class="col-md-12">
+      <mat-label>Api Selected</mat-label>
+      <input matInput #url value="http://localhost:5000">
+      <button mat-icon-button matSuffix (click)="post(url.value)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <a mat-list-item (click)="url.value = 'http://localhost:5000'">
+    <span mat-line>Api dev</span>
+    <span mat-line>http://localhost:5000</span>
+  </a>
+
+  <a mat-list-item (click)="url.value = 'https://gestion-material.herokuapp.com'">
+    <span mat-line>Api prod</span>
+    <span mat-line>https://gestion-material.herokuapp.com</span>
+  </a>
+
+  <a mat-list-item>
+    <span mat-line>Message server</span>
+    <span mat-line>{{message}}</span>
+  </a>
+
+  <!-- <div mat-list-item (click)="openLink($event)">
+      <span mat-line>Google Hangouts</span>
+      <span mat-line>Show to your coworkers</span>
+    </div> -->
+</mat-nav-list>

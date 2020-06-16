@@ -4,8 +4,9 @@
   // color: white;
   ::ng-deep .mat-list-item-content {
     .mat-icon {
-      border-left: solid 5px #0078D7;
+      border-left: solid 5px #f44336;
     }
+    color: #f44336;
   }
 
 }
@@ -36,9 +37,9 @@
 
 
 
-mat-sidenav {
-  background-color: #F4F4F4;
-}
+// mat-sidenav {
+//   background-color: #F4F4F4;
+// }
 
 ::ng-deep .mat-drawer-side {
   border-right: solid 1px rgba(0, 0, 0, 0);
@@ -53,6 +54,13 @@ main {
   // height: 100%;
 }
 
+.close {
+  &:hover {
+    background-color: red;
+    color: white;
+  }
+}
+
 mat-toolbar {
   min-height: 40px;
   // height: 50px;
@@ -60,6 +68,7 @@ mat-toolbar {
   // display: flex;
   // background-color: #3F51B5;
   // color: white;
+  // -webkit-app-region: drag;
   height: 40px;
   position: fixed;
   z-index: 10;
@@ -73,23 +82,25 @@ mat-toolbar {
     // box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
   }
 
-  .example-loading-shade {
-    position: absolute !important;
-    top: 0 !important;
-    // left: 0 !important;
-    // bottom: 56px !important;
-    // right: 0 !important;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.15) !important;
-    z-index: 10 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
 
-    mat-progress-bar {
-      width: 200px;
-    }
+}
+
+.example-loading-shade {
+  position: absolute !important;
+  top: 0 !important;
+  // left: 0 !important;
+  // bottom: 56px !important;
+  // right: 0 !important;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.15) !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  mat-progress-bar {
+    width: 200px;
   }
 }
 :host {

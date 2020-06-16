@@ -1,35 +1,25 @@
-<mat-toolbar class="mat-elevation-z6">
-  <div class="example-loading-shade" *ngIf="!isDoneGetInfo">
-    <!-- <mat-spinner *ngIf="true"></mat-spinner> -->
-    <mat-progress-bar mode="determinate" [value]="loadPercent"></mat-progress-bar>
-  </div>
+<mat-toolbar color="warn" class="mat-elevation-z6">
+
   <mat-toolbar-row>
     <button mat-button (click)="snav.toggle()" routerLinkActive="active">
       <mat-icon>menu</mat-icon>
     </button>
-    <p></p>
-    &nbsp;&nbsp;&nbsp;
-    <!-- <p>{{(this.myMedia.windowSizeChanged | async).width}}</p> -->
-    <span class="example-spacer"></span>
-    <!-- <p>role : {{session.getUser.profil.label}}</p> -->
-    <!-- <button mat-button matTooltip="Theme" [matMenuTriggerFor]="menuT" style="margin-right: 5px;">
-      <mat-icon>format_color_fill</mat-icon>
-    </button> -->
-    <!-- <mat-menu #menuT="matMenu">
-      <button mat-menu-item (click)="changeTheme('dark-theme')">
-        <mat-icon style="color: black;">color_lens</mat-icon><strong>Dark</strong>
-      </button>
-      <button mat-menu-item (click)="changeTheme('default-theme')">
-        <mat-icon style="color: #1976d2;">color_lens</mat-icon><strong>Light</strong>
-      </button>
-    </mat-menu> -->
 
-    <!-- <button mat-icon-button color="primary" (click)="post()">
-      <mat-icon>send</mat-icon>
-    </button> -->
+    <!-- <span class="example-spacer"></span> -->
+    <span class="w-100 h-100"  style="-webkit-app-region: drag;"></span>
 
-    <button mat-icon-button color="primary" (click)="reset()">
+
+    <!-- <button mat-icon-button color="primary" (click)="reset()">
       <mat-icon>refresh</mat-icon>
+    </button> -->
+    <button mat-button (click)="do('min')" style="border-radius: 0;margin-top: -14px; height: 40px;z-index: 9999;">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button mat-button class="ml-1" (click)="do('max')" style="border-radius: 0;margin-top: -22px; height: 50px;z-index: 9999;">
+      <mat-icon style="transform: scale(-1, -1); font-size: 1.2em;">filter_none</mat-icon>
+    </button>
+    <button mat-button class="ml-1 close" (click)="do('close')" style="border-radius: 0;margin-top: -14px; height: 40px;z-index: 9999;">
+      <mat-icon>clear</mat-icon>
     </button>
 
 
@@ -45,8 +35,11 @@
 </mat-toolbar>
 
 <mat-sidenav-container #sidenav class="example-sidenav-container" style="height: 100%;z-index: 9;">
+
+
   <mat-sidenav #snav [mode]="(!mobileQuery.matches) ? 'side' : 'push'" [opened]="opened && !mobileQuery.matches"
     [fixedInViewport]="true" fixedTopGap="40">
+
     <div class="d-flex justify-content-between flex-column h-100">
 
 
@@ -65,13 +58,15 @@
 
       </mat-nav-list>
 
-      <mat-form-field appearance="fill" style="width: 160px; margin-top: auto; padding: 0 10px;">
+      <!-- <mat-form-field appearance="fill" style="width: 160px; margin-top: auto; padding: 0 10px;">
         <mat-label>Time</mat-label>
         <input matInput type="number" #time value="1000" required>
         <button mat-icon-button matSuffix (click)="post(time.value)">
           <mat-icon>send</mat-icon>
         </button>
-      </mat-form-field>
+      </mat-form-field> -->
+
+      <button mat-raised-button class="m-1" color="warn" (click)="openDialog()"><mat-icon>send</mat-icon></button>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -82,6 +77,10 @@
 
 
     <main style="margin: 40px 0 0 5px; overflow: hidden;">
+      <div class="example-loading-shade" *ngIf="!isDoneGetInfo">
+        <!-- <mat-spinner *ngIf="true"></mat-spinner> -->
+        <mat-progress-bar mode="determinate" [value]="loadPercent"></mat-progress-bar>
+      </div>
       <mat-tab-group style="overflow: hidden;" headerPosition="top" [selectedIndex]="tabIndex.value"
         (selectedIndexChange)="tabIndex.setValue($event)">
         <mat-tab label="Product">

@@ -1,5 +1,6 @@
 <div #infoSystemeHtml class="col-md-12">
   <style>
+
     tr th {
       width: 30%;
       padding: 2px 0 !important;
@@ -15,12 +16,16 @@
 
     table {
       font-size: .9em;
+      /* color: unset !important; */
     }
   </style>
-  <section class="mb-2 mt-2">
+
+  <section class="mb-2 mt-3 d-flex align-items-center">
     <h3>Informations système</h3>
   </section>
   <mat-divider></mat-divider>
+
+
 
   <table class="table table-borderless w-100 mt-3" *ngIf="service.infoCostume">
     <tbody>

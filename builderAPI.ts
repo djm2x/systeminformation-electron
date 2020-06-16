@@ -1,41 +1,74 @@
 import * as builder from 'electron-builder';
+import * as fs from 'fs';
+import * as fse from 'fs-extra';
 
-const opt: builder.CliOptions = {
-  targets: builder.Platform.WINDOWS.createTarget(),
-  config: {
-    directories: {
-      output: 'build05',
-      // buildResources: `./`,
-      // app: './dist'
+const PRODUCT_NAME = 'sys-info';
+const VERSION = '1.0.0';
+const ext = 'exe';
+const BUILD_FOLDER = `build-${VERSION}`;
+
+async function main() {
+  const opt: builder.CliOptions = {
+    targets: builder.Platform.WINDOWS.createTarget(),
+    config: {
+      directories: {
+        output: BUILD_FOLDER,
+        // buildResources: `./`,
+        // app: './'
+      },
+      buildVersion: '1.0.0',
+      appId: 'com.myCompany.myApp',
+      productName: 'myAppName',
+      copyright: 'Copyright © 2019 myCompany',
+      nsisWeb: {
+        appPackageUrl : 'https://example.com/download/latest',
+        artifactName: `${PRODUCT_NAME} Web Setup ${VERSION}.${ext}`,
+        allowElevation: true,
+        allowToChangeInstallationDirectory: true,
+        oneClick: false,
+      },
+      win: {
+        artifactName: `${PRODUCT_NAME}-${VERSION}.${ext}`,
+        asar: true,
+        // icon: `${__dirname}/angular/src/assets/icon.png`,
+        compression: "maximum",
+        files: [
+          './node_modules/@*',
+          '!./build*',
+          '!./angular*',
+          './main.js',
+          './dist/**/*'
+        ],
+        target: [
+          {
+            // target: 'portable',
+            target: 'nsis-web',
+            arch: [
+              'ia32',
+              // 'x64'
+            ],
+          }
+        ],
+      },
     },
-    buildVersion: '1.0.0',
-    appId: 'com.myCompany.myApp',
-    productName: 'myAppName',
-    copyright: 'Copyright © 2019 myCompany',
-    win: {
-      artifactName: 'app.exe',
-      asar: false,
-      files: [
-        '!./node_modules/@*',
-        '!./build*',
-        './dist/main.js',
-        './dist/**/*'
-      ],
-      target: [
-        {
-          target: 'portable',
-          arch: [
-            'ia32',
-            // 'x64'
-          ],
-        }
-      ],
-      // icon: './src/favicon.ico'
-    },
-  },
-};
+  };
 
-builder.build(opt)
-  .then(r => console.log('Build OK!', r))
-  .catch(e => console.log(e));
+  try {
+    if (fse.existsSync(`${__dirname}/${BUILD_FOLDER}`)) {
+      // fs.unlinkSync(`${__dirname}/${BUILD_FOLDER}`)
+      fse.removeSync(`${__dirname}/${BUILD_FOLDER}`)
+      console.log(`${__dirname}/${BUILD_FOLDER} a ete supprimer avec success`);
+    }
+    
+    const r = await builder.build(opt)
+    console.log('Build OK!', r);
 
+  } catch (e) {
+    console.log('>>>>>>>>>>>>>>>>>>>>>> BuilderAPi begin trace')
+    console.log(e)
+    console.log('>>>>>>>>>>>>>>>>>>>>>> BuilderAPi end trace')
+  }
+}
+
+//
+main();
