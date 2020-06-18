@@ -26,6 +26,8 @@ export class ElectronService {
     if (r) {
       this.infoCostume = JSON.parse(r).data.infoCostume;
       this.o.nSerie = this.infoCostume.serial;
+      this.o.model = this.infoCostume.model;
+      this.o.nom = this.infoCostume.name;
 
       this.isLoadingResults.next(false);
     } else {
@@ -61,7 +63,7 @@ export class ElectronService {
 
 
       // this.info = r;
-      this.o.nSerie = r.generalStaticData.system.serial;
+      
 
       r = r;
 
@@ -83,7 +85,9 @@ export class ElectronService {
         serial: r.generalStaticData.system.serial,
       };
 
-      this.o.nSerie = this.infoCostume.serial;
+      this.o.nSerie = r.generalStaticData.system.serial;
+      this.o.model = r.generalStaticData.system.model;
+      this.o.nom = r.generalStaticData.os.hostname;
 
       console.log(r);
       console.log(this.infoCostume);

@@ -17,8 +17,8 @@ export class SplashScreenService {
   }
 
   init() {
-    this.splashScreenElem = this.document.body.querySelector('#vex-splash-screen');
-
+    this.splashScreenElem = this.document.body.querySelector('#splash-screen');
+    
     if (this.splashScreenElem) {
       this.router.events.pipe(
         map(e => {

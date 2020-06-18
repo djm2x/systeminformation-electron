@@ -1,52 +1,51 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Front</title>
+  <title>Angular</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="icon" type="image/x-icon" href="favicon.png"> -->
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <!-- <link rel="shortcut icon" href="//cvtic.unilim.fr/pluginfile.php/1/theme_boost/favicon/1584449612/cvtic-2015-o.png" /> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet"> -->
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 </head>
-<body style="background-color: #303030;">
-  <style>
 
-    #vex-splash-screen {
-      /* display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; */
-      /* background: #13293d; */
+<body>
+  <style>
+    /* #splash-screen {
       z-index: 99999;
       pointer-events: none;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100vw;
       height: 100vh;
+    } */
+
+    #splash-screen {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #303030;
+      z-index: 99999;
+      pointer-events: none;
     }
 
-    #vex-splash-screen .header {
-      /* z-index: 10;
-      color: white; */
+    #splash-screen .header {
       margin-bottom: 7vh;
     }
 
-    #vex-splash-screen>.wrapper {
-      /* position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%); */
-    }
-
-    @-webkit-keyframes ball-scale-multiple {
+    /* @-webkit-keyframes ball-scale-multiple {
       0% {
         -webkit-transform: scale(0);
         transform: scale(0);
@@ -84,8 +83,6 @@
 
     .ball-scale-multiple {
       position: relative;
-      /* -webkit-transform: translateY(-30px);
-      transform: translateY(-30px); */
     }
 
     .ball-scale-multiple>div:nth-child(2) {
@@ -99,7 +96,7 @@
     }
 
     .ball-scale-multiple>div {
-      background-color: #ebebebb9;
+      background-color: #f44336;
       border-radius: 100%;
       -webkit-animation-fill-mode: both;
       animation-fill-mode: both;
@@ -112,7 +109,8 @@
       height: 90px;
       -webkit-animation: ball-scale-multiple 1s 0s linear infinite;
       animation: ball-scale-multiple 1s 0s linear infinite;
-    }
+    } */
+
     .footer {
       position: absolute;
       bottom: 20px;
@@ -124,29 +122,80 @@
     .footer p {
       margin: 0;
       font-weight: bold;
-      color: #ebebebb9;
     }
 
+    .circle {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 370px;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      background: #ddd;
+      border-radius: 50%;
+    }
 
+    .inner-circle {
+      width: 92%;
+      height: 92%;
+      background: #303030;
+      border-radius: 50%;
+      margin: auto;
+      vertical-align: middle;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+    }
+
+    .spinner {
+      height: 0;
+      width: 0;
+      border-radius: 50%;
+      border-right: 50px solid #f44336;
+      border-top: 50px solid transparent;
+      border-left: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+
+      animation: rotate 1.5s infinite linear;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 
-  <div id="vex-splash-screen">
+  <div id="splash-screen">
     <div class="header">
-      <!-- <img src="assets/logo.png" width="200" > -->
-      <h1 style="font-weight: bold; color: #ebebebb9;">My App</h1>
+      <img src="assets/logo.png" width="350">
     </div>
-    <div class="wrapper">
+    <!-- <div class="wrapper">
       <div class="ball-scale-multiple">
         <div></div>
         <div></div>
         <div></div>
       </div>
+    </div> -->
+    <div class="circle">
+      <div class="spinner"></div>
+      <div class="inner-circle"></div>
     </div>
     <div class="footer">
-      <!-- <img src="assets/favicon.png" width="50" height="50"> -->
-      <p>Mohamed-Mourabit - TC05</p>
+      <img src="assets/logo-mini.png" width="35">
+      <p style="color: white;">&nbsp;- UE 3TC05 2020</p>
     </div>
   </div>
   <app-root></app-root>
 </body>
+
 </html>

@@ -26,15 +26,18 @@ export class SheetbottomComponent implements OnInit {
 
   post(url, time = 100) {
     console.log(url)
-    this.message = 'Info submitted successfuly';
-    return
+    // this.message = 'Info submitted successfuly';
+    // return
     setTimeout(() => {
       const o: EquipementInfo = this.service.o;
+      console.log(o);
       if (o.infoSystemeHtml !== '' && o.softwareHtml !== '') {
         o.date = new Date();
         this.api.post(url, o).subscribe(r => {
           console.log('post done', r);
           this.message = 'Info submitted successfuly';
+        }, e => {
+          this.message = 'Error occur';
         });
       }
 
