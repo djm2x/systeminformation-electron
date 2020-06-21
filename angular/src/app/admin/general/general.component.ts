@@ -14,8 +14,6 @@ export class GeneralComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngOnInit(): void {
-    // this.intervalId = setInterval(() => this.get(), 1000);
-    // this.get();
     setInterval(() => this.date = new Date(), 1000);
   }
 

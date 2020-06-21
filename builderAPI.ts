@@ -6,7 +6,7 @@ const PRODUCT_NAME = 'sys-info';
 const VERSION = '1.0.0';
 const ext = 'exe';
 const BUILD_FOLDER = `build-${VERSION}`;
-
+const URL_DOWNLOAD = 'https://gestion-materiels.herokuapp.com';
 async function main() {
   const opt: builder.CliOptions = {
     targets: builder.Platform.WINDOWS.createTarget(),
@@ -21,8 +21,9 @@ async function main() {
       productName: 'myAppName',
       copyright: 'Copyright © 2019 myCompany',
       nsisWeb: {
-        appPackageUrl : 'https://example.com/download/latest',
-        artifactName: `${PRODUCT_NAME} Web Setup ${VERSION}.${ext}`,
+        appPackageUrl : `${URL_DOWNLOAD}/download/${PRODUCT_NAME}.${ext}`,
+        artifactName: `${PRODUCT_NAME}.${ext}`,
+        // artifactName: `${PRODUCT_NAME} Web Setup ${VERSION}.${ext}`,
         allowElevation: true,
         allowToChangeInstallationDirectory: true,
         oneClick: false,
