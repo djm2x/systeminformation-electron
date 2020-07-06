@@ -16,6 +16,9 @@ import { EquipementInfo } from './models';
 import { TitleBarService } from '../shared/title-bar.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { SheetbottomComponent } from './sheetbottom/sheetbottom.component';
+
+const ipc = (window as any).require('electron').ipcRenderer;
+const remote = (window as any).require('electron').remote;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -59,7 +62,7 @@ export class AdminComponent implements OnInit {
 
 
 
-   loadingPoucentage() {
+  loadingPoucentage() {
     const t = setInterval((e) => {
       if (this.isLoading === false) {
         clearInterval(t);
@@ -117,6 +120,16 @@ export class AdminComponent implements OnInit {
   openDialog() {
     this.bottomSheet.open(SheetbottomComponent, { data: 'me', });
   }
+
+  devTools() {
+
+    // remote.getCurrentWindow().reload();
+    ipc.prependOnceListener('page', (event, r) => {
+
+    });
+    ipc.send('main', 'plz click for me');
+  }
+
 }
 
 

@@ -126,7 +126,7 @@ function send(listningRoute: string, data: any) {
 }
 
 function activeDevToolsListner() {
-  ipcMain.on('main', (event, r) => {
+  ipcMain.on('main', (event: any, r) => {
     mainWindow.webContents.openDevTools();
 
     mainWindow.webContents.send('page', 'i did click for you');

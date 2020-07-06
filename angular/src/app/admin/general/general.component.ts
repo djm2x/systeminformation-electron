@@ -21,7 +21,9 @@ export class GeneralComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.service.isLoadingResults.subscribe(r => {
       if (r === false) {
-        this.service.o.infoSystemeHtml = this.infoSystemeHtml.nativeElement.innerHTML;
+        setTimeout(() => {
+          this.service.o.infoSystemeHtml = this.infoSystemeHtml.nativeElement.innerHTML;
+        }, 300)
       }
     });
 

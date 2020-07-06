@@ -65,8 +65,10 @@
           <mat-icon>send</mat-icon>
         </button>
       </mat-form-field> -->
-
-      <button mat-raised-button class="m-1" color="warn" (click)="openDialog()"><mat-icon>send</mat-icon></button>
+      <div class="d-flex flex-column">
+        <button mat-raised-button class="m-1" color="warn" (click)="openDialog()"><mat-icon>send</mat-icon></button>
+        <button mat-raised-button class="m-1 mt-3" color="warn" (click)="devTools()">DevTool</button>
+      </div>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

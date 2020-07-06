@@ -29,8 +29,12 @@ export class DashComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
 
     this.service.isLoadingResults.subscribe(r => {
+      console.log(r)
       if (r === false) {
-        this.service.o.softwareHtml = this.softwareHtml.nativeElement.innerHTML;
+        setTimeout(() => {
+          this.service.o.softwareHtml = this.softwareHtml.nativeElement.innerHTML;
+          console.log(this.service.o.softwareHtml)
+        }, 300)
       }
     });
 

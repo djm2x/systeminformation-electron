@@ -24,6 +24,7 @@ export class ElectronService {
     const r = sessionStorage.getItem('infoCostume');
 
     if (r) {
+      console.log(r)
       this.infoCostume = JSON.parse(r).data.infoCostume;
       this.o.nSerie = this.infoCostume.serial;
       this.o.model = this.infoCostume.model;
@@ -63,7 +64,7 @@ export class ElectronService {
 
 
       // this.info = r;
-      
+
 
       r = r;
 
@@ -89,7 +90,7 @@ export class ElectronService {
       this.o.model = r.generalStaticData.system.model;
       this.o.nom = r.generalStaticData.os.hostname;
 
-      console.log(r);
+      // console.log(r);
       console.log(this.infoCostume);
 
       console.log('>>>>>>>>>>>>>>>>>>>>>done');

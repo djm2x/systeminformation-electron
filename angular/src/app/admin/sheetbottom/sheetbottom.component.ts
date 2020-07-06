@@ -12,8 +12,8 @@ import { EquipementInfo } from '../models';
 export class SheetbottomComponent implements OnInit {
   message = '...';
   constructor(private bottomSheetRef: MatBottomSheetRef<SheetbottomComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
-  , public service: ElectronService, private api: ApiService
-  ) {}
+    , public service: ElectronService, private api: ApiService
+  ) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -25,23 +25,25 @@ export class SheetbottomComponent implements OnInit {
   }
 
   post(url, time = 100) {
-    console.log(url)
+    // console.log(url)
     // this.message = 'Info submitted successfuly';
     // return
-    setTimeout(() => {
-      const o: EquipementInfo = this.service.o;
-      console.log(o);
-      if (o.infoSystemeHtml !== '' && o.softwareHtml !== '') {
-        o.date = new Date();
-        this.api.post(url, o).subscribe(r => {
-          console.log('post done', r);
-          this.message = 'Info submitted successfuly';
-        }, e => {
-          this.message = 'Error occur';
-        });
-      }
+    // setTimeout(() => {
 
-    }, time)
+
+    // }, time)
+    this.message = '...'
+    const o: EquipementInfo = this.service.o;
+    console.log(o);
+    if (o.infoSystemeHtml !== '' && o.softwareHtml !== '') {
+      o.date = new Date();
+      this.api.post(url, o).subscribe(r => {
+        console.log('post done', r);
+        this.message = 'Info submitted successfuly';
+      }, e => {
+        this.message = 'Error occur';
+      });
+    }
 
   }
 
